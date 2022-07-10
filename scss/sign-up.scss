@@ -1,0 +1,268 @@
+@import "./style.scss";
+@import "./buttons.scss";
+@import "./mixins.scss";
+
+.phokemon-header {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	color: $dark-orange;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 0 2px 0 #ffffff;
+	font-size: 5rem;
+	padding: 1.75em 4em 0.75em;
+	background-color: $dirty-white;
+	@include heading-font();
+}
+
+@media screen and (max-width: 800px) {
+	.phokemon-header {
+		padding: 3em 2em 0.5em;
+		font-size: 2.5rem;
+	}
+}
+
+.divider {
+	height: 100px;
+	position: relative;
+	width: 100%;
+	transform: scaleX(-1);
+	background-color: $dirty-white;
+
+	&::before {
+		content: "";
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		background: #8346e5;
+		clip-path: polygon(0 100%, 100% 100%, 100% 15px);
+	}
+
+	&::after {
+		content: "";
+		background-image: linear-gradient(90deg, #fbcb24 0%, #e68f05 100%);
+		clip-path: polygon(0 100%, 100% 30px, 100% 0, 0 calc(100% - 13px));
+		height: 100%;
+		display: block;
+		position: relative;
+	}
+}
+
+.champion-icon {
+	width: 1038px;
+	position: absolute;
+	right: 20px;
+	z-index: 1;
+	top: 0;
+}
+
+.content-container {
+	position: relative;
+	background: $purple;
+	background-image: linear-gradient(
+		180deg,
+		#8346e5 4%,
+		rgba(131, 70, 229, 0) 33%
+	);
+	min-height: 110vh;
+	padding: 5em 0;
+	overflow-y: hidden;
+}
+
+.section {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	overflow-x: hidden;
+	position: relative;
+	z-index: 3;
+
+	.section-content {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		width: 75%;
+
+		.section-body {
+			display: flex;
+			flex-direction: column;
+
+			&-fade {
+				background-image: linear-gradient(
+					0deg,
+					rgba(0, 0, 0, 0) 0%,
+					rgba(0, 0, 0, 0.6) 100%
+				);
+				color: white;
+				padding: 2.5em 2.5em 2.5em 5em;
+
+				> * + * {
+					margin-top: 1.25em;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.section {
+		.section-content {
+			width: 95%;
+
+			.section-body {
+				&-fade {
+					padding: 2.5em;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.section {
+		.section-content {
+			width: 95%;
+
+			.section-body {
+				&-fade {
+					padding: 1.5em;
+				}
+			}
+		}
+	}
+}
+
+.section-title {
+	display: flex;
+	flex-grow: 1;
+	align-items: center;
+	color: white;
+	padding: 0.5em 1.75em;
+	border-radius: 40px 0 0 0;
+}
+
+.section-title-text {
+	@include heading-font;
+	font-size: 2.25rem;
+	margin-left: 0.5em;
+	line-height: 1.7;
+	font-style: italic;
+	text-shadow: 0 2px 0px $shadow;
+}
+
+@media screen and (max-width: 640px) {
+	.section-title-text {
+		font-size: 1.75rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.section-title-text {
+		font-size: 1.5rem;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.section-title-text {
+		font-size: 1.25rem;
+	}
+}
+
+.signup-section-title {
+	background-image: linear-gradient(
+		-89deg,
+		rgba(74, 24, 133, 0) 0%,
+		$dark-orange 50%
+	);
+}
+
+.signup-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2em;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+
+	> * + * {
+		margin-top: 1em;
+	}
+
+	label {
+		@include heading-font;
+		font-size: 1.25rem;
+	}
+
+	.input-wrapper {
+		width: 100%;
+		position: relative;
+
+		input {
+			width: 100%;
+			padding: 0.75em 1em;
+			border-radius: 6px;
+			@include heading-font;
+			background-color: $dirty-white;
+			color: $black;
+			outline: none;
+		}
+	}
+
+	.btn-wrapper {
+		display: flex;
+		justify-content: center;
+		margin-top: 2em;
+	}
+}
+
+.info-container {
+	display: flex;
+	flex-direction: column;
+	border-left: 1px solid $dirty-white;
+	padding-left: 2em;
+
+	.info-header {
+		@include heading-font;
+		font-size: 1.5rem;
+	}
+
+	.info-description {
+		margin-top: 0.5em;
+	}
+
+	.login {
+		margin-top: 2em;
+
+		span {
+			cursor: pointer;
+			text-decoration: underline;
+
+			&:hover {
+				color: yellow;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.signup-content {
+		grid-template-columns: 1fr;
+		grid-template-rows: 1fr 2fr;
+		gap: 2em;
+	}
+
+	.info-container {
+		grid-row: 1;
+		padding-left: 0;
+		border-left: none;
+	}
+
+	.form-container {
+		grid-row: 2;
+	}
+}

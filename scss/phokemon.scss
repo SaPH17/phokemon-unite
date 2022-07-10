@@ -1,0 +1,278 @@
+@import "./style.scss";
+@import "./buttons.scss";
+@import "./mixins.scss";
+
+.phokemon-header {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	color: $dark-orange;
+	font-style: italic;
+	text-align: center;
+	text-shadow: 0 2px 0 #ffffff;
+	font-size: 5rem;
+	padding: 1.75em 4em 1.5em;
+	background-color: $dirty-white;
+	@include heading-font();
+}
+
+@media screen and (max-width: 800px) {
+	.phokemon-header {
+		padding: 3em 2em 0.5em;
+		font-size: 2.5rem;
+	}
+}
+
+.divider {
+	height: 100px;
+	position: relative;
+	width: 100%;
+	transform: scaleX(-1);
+	background-color: $dirty-white;
+
+	&::before {
+		content: "";
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		background: #8346e5;
+		clip-path: polygon(0 100%, 100% 100%, 100% 15px);
+	}
+
+	&::after {
+		content: "";
+		background-image: linear-gradient(90deg, #fbcb24 0%, #e68f05 100%);
+		clip-path: polygon(0 100%, 100% 30px, 100% 0, 0 calc(100% - 13px));
+		height: 100%;
+		display: block;
+		position: relative;
+	}
+}
+
+.champion-icon {
+	width: 1038px;
+	position: absolute;
+	right: 20px;
+	z-index: 1;
+	top: 0;
+}
+
+.content-container {
+	position: relative;
+	background: $purple;
+	background-image: linear-gradient(
+		180deg,
+		#8346e5 4%,
+		rgba(131, 70, 229, 0) 33%
+	);
+	min-height: 175vh;
+	padding-bottom: 5em;
+}
+
+input[type="radio"] {
+	position: absolute;
+	left: -9999px;
+}
+
+.filter-container {
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 2em;
+	width: 100%;
+	justify-content: center;
+	position: relative;
+	z-index: 3;
+
+	ul {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		list-style: none;
+		gap: 0.5em;
+
+		.filter-item {
+			display: flex;
+			cursor: pointer;
+
+			.filter-btn {
+				display: flex;
+				background: #351061;
+				color: white;
+				@include heading-font();
+				text-transform: uppercase;
+				border: 1px solid #351061;
+				border-radius: 2em;
+				padding: 0.5em 1em;
+				cursor: pointer;
+				@include unselectable;
+
+				&:hover {
+					background-color: white;
+					color: $dark-purple;
+				}
+			}
+		}
+	}
+}
+
+[value="all"]:checked ~ .filter-container label[for="all"],
+[value="attacker"]:checked ~ .filter-container label[for="attacker"],
+[value="defender"]:checked ~ .filter-container label[for="defender"],
+[value="all-rounder"]:checked ~ .filter-container label[for="all-rounder"],
+[value="supporter"]:checked ~ .filter-container label[for="supporter"],
+[value="speedster"]:checked ~ .filter-container label[for="speedster"] {
+	background: $yellow;
+	color: $black;
+	border: 1px solid yellow;
+}
+
+[value="all"]:checked ~ .phokemon-list-container .card-item[data-category] {
+	display: flex;
+}
+
+[value="attacker"]:checked
+	~ .phokemon-list-container
+	.card-item:not([data-category~="attacker"]),
+[value="defender"]:checked
+	~ .phokemon-list-container
+	.card-item:not([data-category~="defender"]),
+[value="all-rounder"]:checked
+	~ .phokemon-list-container
+	.card-item:not([data-category~="all-rounder"]),
+[value="speedster"]:checked
+	~ .phokemon-list-container
+	.card-item:not([data-category~="speedster"]),
+[value="supporter"]:checked
+	~ .phokemon-list-container
+	.card-item:not([data-category~="supporter"]) {
+	display: none;
+}
+
+.phokemon-list-container {
+	margin: 5em 8em 3em;
+	padding: 0 0.75em;
+
+	ul {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+		gap: 2em;
+		list-style: none;
+
+		.card-item {
+			display: flex;
+			justify-content: center;
+		}
+	}
+}
+
+@media screen and (max-width: 1000px) {
+	.phokemon-list-container {
+		margin: 3em 0 3em;
+	}
+}
+
+.phokemon-card {
+	border-radius: 12px;
+	border: 1px solid #19072d;
+	overflow: hidden;
+	position: relative;
+	z-index: 5;
+	cursor: pointer;
+	transform-origin: center 60%;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+	background-color: black;
+
+	.phokemon-card-image {
+		position: relative;
+		z-index: 5;
+		margin: 2px;
+		border-radius: 12px;
+
+		.phokemon-card-background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			transform: translate3d(0, 0, 1px);
+			z-index: 5;
+
+			&::before {
+				content: "";
+				position: absolute;
+				left: 0;
+				top: 0;
+				height: 100%;
+				width: 100%;
+				background-image: url("../asset/img/square-pattern-30.svg"),
+					linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 38%);
+				background-color: var(--background-color);
+				background-size: 140px, auto;
+				background-position: center, left top;
+				z-index: 3;
+				border-radius: 12px;
+			}
+		}
+		.phokemon-card-character {
+			position: relative;
+			z-index: 5;
+
+			img {
+				transition: transform 0.2s ease;
+				display: block;
+				max-width: 100%;
+				border-radius: 12px;
+			}
+		}
+	}
+	.phokemon-card-data {
+		padding: 1rem 0.5rem;
+		background: black;
+		position: relative;
+		z-index: 5;
+
+		.phokemon-card-name {
+			font-size: 1.25rem;
+			@include heading-font();
+			text-transform: uppercase;
+			font-style: italic;
+			text-align: center;
+			color: white;
+		}
+	}
+
+	&:hover {
+		box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.4);
+		transform: scale(1.05);
+		transform-origin: center 60%;
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+		.phokemon-card-image .phokemon-card-character img {
+			transform: scale(1.1);
+			transition: transform 0.2s ease;
+		}
+	}
+}
+
+.card-item[data-category="all-rounder"] {
+	--background-color: #ce5fd3;
+}
+
+.card-item[data-category="attacker"] {
+	--background-color: #f16c38;
+}
+
+.card-item[data-category="defender"] {
+	--background-color: #aced5b;
+}
+
+.card-item[data-category="supporter"] {
+	--background-color: #fecc51;
+}
+
+.card-item[data-category="speedster"] {
+	--background-color: #29a5e3;
+}

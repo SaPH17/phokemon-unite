@@ -1,0 +1,11 @@
+@mixin heading-font {
+	font-family: $header-font;
+	font-weight: 700;
+}
+
+@mixin unselectable {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
